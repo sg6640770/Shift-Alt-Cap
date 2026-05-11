@@ -1,0 +1,33 @@
+name: Update Stock Data
+
+on:
+  schedule:
+    - cron: '0 * * * *' 
+  workflow_dispatch:       # Allows manual run from Actions tab
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install yfinance pandas numpy
+
+      - name: Run update script
+        run: python update_stocks.py
+
+      - name: Commit updated JSON files
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add weight/*.json
+          git commit -m "Auto-update stock data $(date +'%Y-%m-%d')" || echo "No changes to commit"
+          git push
