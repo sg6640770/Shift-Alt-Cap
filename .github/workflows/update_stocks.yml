@@ -36,3 +36,5 @@ jobs:
           git stash pop
           git commit -m "Auto-update stock data $(date +'%Y-%m-%d')" || echo "No changes to commit"
           git push
+
+          
