@@ -17,7 +17,7 @@ function setActiveTimeButton(button) {
 // AIT → Most Relevant → LEFT CARD
 async function updateAITMetrics(timeline) {
   try {
-    const response = await fetch('./weight/AIT_Portfolio_Performance.json');
+    const response = await fetch('./weight/AIT_Portfolio_Performance.json?v=' + Date.now());
     if (!response.ok) throw new Error('Failed to fetch AIT metrics');
 
     const data = await response.json();
@@ -40,7 +40,7 @@ async function updateAITMetrics(timeline) {
 // ESS → All Weather → RIGHT CARD
 async function updateESSMetrics(timeline) {
   try {
-    const response = await fetch('./weight/ESS_Portfolio_Performance.json');
+    const response = await fetch('./weight/ESS_Portfolio_Performance.json?v=' + Date.now());
     if (!response.ok) throw new Error('Failed to fetch ESS metrics');
 
     const data = await response.json();
@@ -66,7 +66,7 @@ async function updateESSMetrics(timeline) {
 
 async function fetchSP500Data() {
   try {
-    const response = await fetch('./weight/sp500_performance.json');
+    const response = await fetch('./weight/sp500_performance.json?v=' + Date.now());
     if (!response.ok) throw new Error("Failed to fetch S&P 500");
     return await response.json();
   } catch (error) {
@@ -77,7 +77,7 @@ async function fetchSP500Data() {
 
 async function fetchNifty50Data() {
   try {
-    const response = await fetch('./weight/nifty50_performance.json');
+    const response = await fetch('./weight/nifty50_performance.json?v=' + Date.now());
     if (!response.ok) throw new Error("Failed to fetch NIFTY 50");
     return await response.json();
   } catch (error) {
@@ -88,7 +88,7 @@ async function fetchNifty50Data() {
 
 async function fetchPortfolioData(portfolioFile) {
   try {
-    const response = await fetch(`./weight/${portfolioFile}`);
+    const response = await fetch(`./weight/${portfolioFile}?v=` + Date.now());
     if (!response.ok) throw new Error(`Failed to fetch ${portfolioFile}`);
     return await response.json();
   } catch (error) {
